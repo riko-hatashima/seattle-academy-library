@@ -91,8 +91,22 @@ public class BooksService {
         String sql = "DELETE FROM books WHERE id =" + bookId + ";";
     
         jdbcTemplate.update(sql);
-        
     }
+
+
+    /**
+     * 書籍を編集する
+     */
+     //bookidどうする？
+    //UPDATE books SET title='はらぺこあおむし',author='こりこり',publisher='畑島',publish_date=20210304,isbn=1234567891011,description='おなかいっぱいになったあおむし、おおきくなったらなにになるかな？' WHERE id=16;
+    public void editBook(BookDetailsInfo bookInfo(int bookid)) {
+        String sql = "UPDATE books SET (title,author,publisher,publish_date,isbn,description) WHERE id="
+                + bookid + ";";
+        
+        jdbcTemplate.update(sql);
+
+    }
+     
     }
 
 

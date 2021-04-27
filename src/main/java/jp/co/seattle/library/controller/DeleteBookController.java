@@ -47,7 +47,6 @@ public class DeleteBookController {
         booksService.deleteBook(bookId);
 
         //""に一覧画面の名前
-
         return "home";
 
     }
