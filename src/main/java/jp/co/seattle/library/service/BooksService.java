@@ -86,6 +86,7 @@ public class BooksService {
         
     }
 
+
     public void deleteBook(int bookId) {
 
         String sql = "DELETE FROM books WHERE id =" + bookId + ";";

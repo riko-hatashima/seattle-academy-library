@@ -30,16 +30,14 @@
                         <input type="text" class="input" name="email" id="email" autocomplete="off" required/>
                         <label class="label">パスワード</label>
                         <input type="password" class="input" id="password" name="password" required/>
-
-                        	<c:if test="${!empty notmapw}">
-              	 		<div class="error">${notmapw}</div>
-                        	</c:if>
+ 							<c:if test="${!empty errorMessage}">
+						<div class="error">${errorMessage}</div>
+							</c:if>
+						
+                        	
 
                         <input type="submit" class="button primary" value="ログイン" />
-                         <c:if test="${!empty errorMessage}">
-							 <div class="error">${errorMessage}</div>
-						</c:if>
-						
+                        
                     </form>
                 </div>
                 <div class="authorization_navi">
