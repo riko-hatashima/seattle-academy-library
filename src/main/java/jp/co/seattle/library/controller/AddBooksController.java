@@ -122,7 +122,7 @@ public class AddBooksController {
             return "addBook";
         }
 
-        model.addAttribute("bookDetailsInfo", booksService.getBookInfo(booksService.getBookId()));
+        model.addAttribute("bookDetailsInfo",booksService.getBookInfo(booksService.getBookId()));
         return "details";
 
     }

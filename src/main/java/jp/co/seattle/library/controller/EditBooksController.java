@@ -51,7 +51,7 @@ public class EditBooksController {
     
     
     @Transactional
-    @RequestMapping(value = "/insertBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
+    @RequestMapping(value = "/updateBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String insertBook(Locale locale,
             @RequestParam("title") String title,
             @RequestParam("author") String author,
@@ -61,7 +61,7 @@ public class EditBooksController {
             @RequestParam("isbn") String isbn,
             @RequestParam("description") String description,
             Model model) {
-        logger.info("Welcome insertBooks.java! The client locale is {}.", locale);
+        logger.info("Welcome updateBooks.java! The client locale is {}.", locale);
         // パラメータで受け取った書籍情報をDtoに格納する。
         BookDetailsInfo bookInfo = new BookDetailsInfo();
         bookInfo.setTitle(title);
@@ -94,7 +94,7 @@ public class EditBooksController {
         }
 
         // 書籍情報を新規登録する//編集
-        booksService.registBook(bookInfo);
+        booksService.editBook(bookInfo);
 
         //model.addAttribute("resultMessage", "登録完了");
 
