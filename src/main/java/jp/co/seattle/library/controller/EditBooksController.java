@@ -7,6 +7,7 @@ import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,13 +18,15 @@ import org.springframework.web.multipart.MultipartFile;
 import jp.co.seattle.library.dto.BookDetailsInfo;
 import jp.co.seattle.library.service.BooksService;
 import jp.co.seattle.library.service.ThumbnailService;
-public class EditBooksController {
-/**
- * Handles requests for the application home page.
- */
-//APIの入り口
 
-    final static Logger logger = LoggerFactory.getLogger(AddBooksController.class);
+@Controller
+public class EditBooksController {
+    /**
+     * Handles requests for the application home page.
+     */
+    //APIの入り口
+
+    final static Logger logger = LoggerFactory.getLogger(EditBooksController.class);
 
     @Autowired
     private BooksService booksService;
@@ -31,10 +34,12 @@ public class EditBooksController {
     @Autowired
     private ThumbnailService thumbnailService;
 
-    @RequestMapping(value = "/addBook", method = RequestMethod.GET) //value＝actionで指定したパラメータ
+    @RequestMapping(value = "/editBook", method = RequestMethod.POST) //value＝actionで指定したパラメータ
     //RequestParamでname属性を取得
-    public String login(Model model) {
-        return "addBook";
+    public String login(Model model, @RequestParam("bookId") int bookId) {
+        model.addAttribute("bookInfo", booksService.getBookInfo(bookId));
+
+        return "editBook";
     }
 
     /**
@@ -47,12 +52,11 @@ public class EditBooksController {
      * @param model モデル
      * @return 遷移先画面
      */
-    
-    
-    
+
     @Transactional
     @RequestMapping(value = "/updateBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
-    public String insertBook(Locale locale,
+    public String updateBook(Locale locale,
+            @RequestParam("bookId") Integer bookId,
             @RequestParam("title") String title,
             @RequestParam("author") String author,
             @RequestParam("publisher") String publisher,
@@ -64,13 +68,14 @@ public class EditBooksController {
         logger.info("Welcome updateBooks.java! The client locale is {}.", locale);
         // パラメータで受け取った書籍情報をDtoに格納する。
         BookDetailsInfo bookInfo = new BookDetailsInfo();
+        bookInfo.setBookId(bookId);
         bookInfo.setTitle(title);
         bookInfo.setAuthor(author);
         bookInfo.setPublisher(publisher);
         bookInfo.setPublishDate(publishDate);
         bookInfo.setIsbn(isbn);
         bookInfo.setDescription(description);
-    
+
         // クライアントのファイルシステムにある元のファイル名を設定する
         String thumbnail = file.getOriginalFilename();
 
@@ -93,12 +98,9 @@ public class EditBooksController {
             }
         }
 
-        // 書籍情報を新規登録する//編集
+        // 書籍情報を編集
         booksService.editBook(bookInfo);
 
-        //model.addAttribute("resultMessage", "登録完了");
-
-        // TODO 登録し実装
         //  詳細画面に遷移する
 
         boolean isValidISBN = isbn.matches("[0-9]{0}|[0-9]{10}|[0-9]{13}");
@@ -121,12 +123,9 @@ public class EditBooksController {
         if (flag) {
             return "editBook";
         }
+        model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 
-        model.addAttribute("bookDetailsInfo", booksService.getBookInfo(booksService.getBookId()));
         return "details";
 
     }
 }
-
-
-

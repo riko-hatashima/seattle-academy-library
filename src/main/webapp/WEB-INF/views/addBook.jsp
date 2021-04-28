@@ -109,7 +109,7 @@
                 <div class="addBookBtn_box">
                     <button type="submit" id="add-btn" class="btn_addBook">登録</button>
                 </div>
-                </div>
+               
             </form>
     </main>
 </body>

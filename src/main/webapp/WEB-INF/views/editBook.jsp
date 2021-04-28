@@ -106,8 +106,6 @@
                     <input type="hidden" id="bookId" name="bookId" value="${bookInfo.bookId}">
                 </div>
             </div>
-                        //home.cssのボタンと合わせる　addbook?
-                        
                 <div class="addBookBtn_box">
                     <button type="submit" id="add-btn" class="btn_addBook">更新</button>
                 </div>
