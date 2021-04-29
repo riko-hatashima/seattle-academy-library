@@ -82,14 +82,8 @@ public class BooksService {
                 + "sysdate())";
 
         jdbcTemplate.update(sql);
-<<<<<<< HEAD
-
-    }
-=======
-        
     }
 
->>>>>>> 68727d62fb3091dd29ae6cd2da72657891025118
 
     public void deleteBook(int bookId) {
 
