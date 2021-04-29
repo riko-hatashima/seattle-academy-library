@@ -96,7 +96,7 @@ public class AddBooksController {
         // 書籍情報を新規登録する
         booksService.registBook(bookInfo);
 
-        //model.addAttribute("resultMessage", "登録完了");
+
 
         // TODO 登録しs実装
         //  詳細画面に遷移する
