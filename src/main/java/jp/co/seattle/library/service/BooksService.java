@@ -71,7 +71,6 @@ public class BooksService {
      * @param bookInfo 書籍情報
      */
     public void registBook(BookDetailsInfo bookInfo) {
-
         String sql = "INSERT INTO books (title, author,publisher,thumbnail_name,thumbnail_url,publish_date,isbn,description,reg_date,upd_date) VALUES ('"
                 + bookInfo.getTitle() + "','" + bookInfo.getAuthor() + "','" + bookInfo.getPublisher() + "','"
                 + bookInfo.getThumbnailName() + "','"
@@ -83,18 +82,34 @@ public class BooksService {
                 + "sysdate())";
 
         jdbcTemplate.update(sql);
-        
     }
 
 
     public void deleteBook(int bookId) {
 
         String sql = "DELETE FROM books WHERE id =" + bookId + ";";
-    
+
         jdbcTemplate.update(sql);
-        
-    }
     }
 
+    /**
+     * 書籍を編集する
+     */
 
+    public void editBook(BookDetailsInfo bookInfo) {
+        String sql = "UPDATE books SET "
+                + "title='" + bookInfo.getTitle() + "',"
+                + "author='" + bookInfo.getAuthor() + "',"
+                + "publisher='" + bookInfo.getPublisher() + "',"
+                + "publish_date='" + bookInfo.getPublishDate() + "',"
+                + "isbn='" + bookInfo.getIsbn() + "',"
+                + "description='" + bookInfo.getDescription() + "',"
+                + "upd_date=" + "sysdate()"
+                + "WHERE id="
+                + bookInfo.getBookId() + ";";
 
+        jdbcTemplate.update(sql);
+
+    }
+
+}
