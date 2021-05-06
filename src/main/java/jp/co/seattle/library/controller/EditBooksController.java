@@ -34,16 +34,22 @@ public class EditBooksController {
     @Autowired
     private ThumbnailService thumbnailService;
 
+    /**
+     * 編集画面に遷移する
+     * @param model 編集したい本のID
+     * @param bookId
+     * @return
+     */
     @RequestMapping(value = "/editBook", method = RequestMethod.POST) //value＝actionで指定したパラメータ
     //RequestParamでname属性を取得
-    public String login(Model model, @RequestParam("bookId") int bookId) {
+    public String update(Model model, @RequestParam("bookId") int bookId) {
         model.addAttribute("bookInfo", booksService.getBookInfo(bookId));
 
         return "editBook";
     }
 
     /**
-     * 書籍情報を登録する
+     * 書籍情報を更新する
      * @param locale ロケール情報
      * @param title 書籍名
      * @param author 著者名
@@ -98,8 +104,7 @@ public class EditBooksController {
             }
         }
 
-        // 書籍情報を編集
-        booksService.editBook(bookInfo);
+
 
         //  詳細画面に遷移する
 
@@ -123,6 +128,9 @@ public class EditBooksController {
         if (flag) {
             return "editBook";
         }
+        // 書籍情報を編集
+        booksService.editBook(bookInfo);
+
         model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 
         return "details";
