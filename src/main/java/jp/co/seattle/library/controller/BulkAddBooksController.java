@@ -46,18 +46,13 @@ public class BulkAddBooksController {
     public String bulkInsertBooks(Locale locale,
             @RequestParam("inputCSVFile") MultipartFile inputCSVFile, Model model) {
         List<String[]> bookData = new ArrayList<String[]>();
-        //呼び出す
 
-        try {
-
-            InputStream stream = inputCSVFile.getInputStream();
+        try (InputStream stream = inputCSVFile.getInputStream();
             Reader reader = new InputStreamReader(stream);
-            BufferedReader br = new BufferedReader(reader);
+                BufferedReader br = new BufferedReader(reader);) {
 
-            String line;//一行ずつ読み込む
-            //配列を入れるからString[]である
+            String line;
 
-            //bookdata本棚　bulk一冊
             while ((line = br.readLine()) != null) {
                 String[] bulk = line.split(",", -1);
                 bookData.add(bulk);
