@@ -30,7 +30,6 @@
         </div>
     </header>
     <main>
-        <form action="<%=request.getContextPath()%>/updateBook" method="post" enctype="multipart/form-data" id="data_upload_form">
             <h1>書籍の詳細</h1>
             <div class="content_body detail_book_content">
                 <div class="content_left">
@@ -72,7 +71,7 @@
                 </div>
             </div>
 
-        </div>
+ 
         <div class="edtDelBookBtn_box">
             <form method="post" action="rentBook">
                 <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_rentBook">借りる</button>
@@ -87,7 +86,6 @@
                 <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_deleteBook">削除</button>
             </form>
         </div>
-
     </main>
 </body>
 </html>

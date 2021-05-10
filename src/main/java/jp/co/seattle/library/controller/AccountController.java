@@ -62,7 +62,7 @@ public class AccountController {
         // バリデーションチェック
         boolean isValidEmail = email.matches("^[A-Za-z0-9]+@[A-Za-z0-9]+$");
         boolean isValidPW = password.matches("^[A-Za-z0-9]+$");
-        boolean isValidPWOForCheck = passwordForCheck.matches("^[A-Za-z0-9]+$");
+
         // TODO バリデーションチェック、パスワード一致チェック実装
         if (!(isValidEmail)) {
             model.addAttribute("message1", "メールアドレスが適切ではありません");
