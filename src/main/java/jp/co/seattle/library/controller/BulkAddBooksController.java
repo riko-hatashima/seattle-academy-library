@@ -34,13 +34,25 @@ public class BulkAddBooksController {
     private BooksService booksService;
 
     //一括登録画面に遷移するため
+    /**
+     * 一括登録画面に遷移する
+     * @param model　
+     * @return　一括登録画面名
+     */
     @RequestMapping(value = "/bulkAddBooks", method = RequestMethod.GET)
     public String bulk(Model model) {
         return "bulkAddBooks";
     }
 
-    //jsp作成する
+
     //一括登録のボタン→登録完了画面へ　ファイルを本格的に受け取る
+    /**
+     * CSVファイルを読み込み、書籍情報を登録する
+     * @param locale
+     * @param inputCSVFile　読み込むCSVファイル
+     * @param model
+     * @return　登録完了後の一括登録画面名
+     */
     @Transactional
     @RequestMapping(value = "/bulkInsertBooks", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String bulkInsertBooks(Locale locale,
