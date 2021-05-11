@@ -45,8 +45,8 @@ public class DeleteBookController {
          * 貸し出し可能な書籍のみ削除する
          */
         if (booksService.getRentBookInfo(bookId) == 0) {
-            model.addAttribute("bookList", booksService.getBookList());
             booksService.deleteBook(bookId);
+            model.addAttribute("bookList", booksService.getBookList());
             return "home";
         }
 

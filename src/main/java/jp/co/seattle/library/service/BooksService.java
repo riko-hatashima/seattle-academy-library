@@ -19,6 +19,10 @@ import jp.co.seattle.library.rowMapper.BookInfoRowMapper;
  * 
  *  booksテーブルに関する処理を実装する
  */
+/**
+ * @author user
+ *
+ */
 @Service
 public class BooksService {
     final static Logger logger = LoggerFactory.getLogger(BooksService.class);
@@ -121,10 +125,12 @@ public class BooksService {
 
     }
 
+
     /**
      * 貸し出し中の書籍情報を取得する
+     * @param bookId　書籍ID
+     * @return
      */
-
     public int getRentBookInfo(int bookId) {
 
         // JSPに渡すデータを設定する
@@ -138,8 +144,10 @@ public class BooksService {
         }
     }
 
+
     /**
      * 書籍を返却する
+     * @param bookId　書籍ID
      */
     public void returnBook(int bookId) {
         String sql = "DELETE FROM rent WHERE bookId=" + bookId + ";";
