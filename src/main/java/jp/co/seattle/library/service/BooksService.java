@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -84,7 +85,6 @@ public class BooksService {
         jdbcTemplate.update(sql);
     }
 
-
     public void deleteBook(int bookId) {
 
         String sql = "DELETE FROM books WHERE id =" + bookId + ";";
@@ -112,4 +112,32 @@ public class BooksService {
 
     }
 
+    /**
+     * 書籍を借りる
+     */
+    public void rentBook(int bookId) {
+        String sql = "INSERT INTO RENT SELECT id FROM books WHERE id=" + bookId + ";";
+
+        jdbcTemplate.update(sql);
+
+    }
+
+    /**
+     * 貸し出し中の書籍情報を取得する
+     */
+
+    public int getRentBookInfo(int bookId) {
+
+        // JSPに渡すデータを設定する
+        String sql = "SELECT id FROM RENT where id ="
+                + bookId;
+
+        try {
+            return jdbcTemplate.queryForObject(sql, Integer.class);
+        } catch (EmptyResultDataAccessException e) {
+            return 0;
+        }
+    }
 }
+
+
