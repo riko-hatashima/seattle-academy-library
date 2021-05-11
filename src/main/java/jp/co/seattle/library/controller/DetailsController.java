@@ -24,10 +24,13 @@ public class DetailsController {
     @Autowired
     private BooksService bookdService;
 
+    @Autowired
+    private BooksService booksService;
+
     /**
      * 詳細画面に遷移する
      * @param locale
-     * @param bookId
+     * @param bookId　書籍ID
      * @param model
      * @return
      */
@@ -36,6 +39,18 @@ public class DetailsController {
     public String detailsBook(Locale locale,
             @RequestParam("bookId") Integer bookId,
             Model model) {
+
+        //貸し出しステータスを表示
+
+        if (booksService.getRentBookInfo(bookId) != 0) {
+            model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+            model.addAttribute("cantRent", "貸し出し中");
+
+        } else if (booksService.getRentBookInfo(bookId) == 0) {
+            model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+            model.addAttribute("returnBook", "貸し出し可");
+        }
+
         // デバッグ用ログ
         logger.info("Welcome detailsControler.java! The client locale is {}.", locale);
 

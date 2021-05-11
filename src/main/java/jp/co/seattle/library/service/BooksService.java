@@ -116,8 +116,7 @@ public class BooksService {
      * 書籍を借りる
      */
     public void rentBook(int bookId) {
-        String sql = "INSERT INTO RENT SELECT id FROM books WHERE id=" + bookId + ";";
-
+        String sql = "INSERT INTO rent (bookId) VALUES (" + bookId + ");";
         jdbcTemplate.update(sql);
 
     }
@@ -129,7 +128,7 @@ public class BooksService {
     public int getRentBookInfo(int bookId) {
 
         // JSPに渡すデータを設定する
-        String sql = "SELECT id FROM RENT where id ="
+        String sql = "SELECT id FROM rent WHERE bookId ="
                 + bookId;
 
         try {
@@ -138,6 +137,14 @@ public class BooksService {
             return 0;
         }
     }
+
+    /**
+     * 書籍を返却する
+     */
+    public void returnBook(int bookId) {
+        String sql = "DELETE FROM rent WHERE bookId=" + bookId + ";";
+
+        jdbcTemplate.update(sql);
+    }
+
 }
-
-
