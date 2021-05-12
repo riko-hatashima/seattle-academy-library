@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,10 @@ import jp.co.seattle.library.rowMapper.BookInfoRowMapper;
  * 書籍サービス
  * 
  *  booksテーブルに関する処理を実装する
+ */
+/**
+ * @author user
+ *
  */
 @Service
 public class BooksService {
@@ -84,7 +89,6 @@ public class BooksService {
         jdbcTemplate.update(sql);
     }
 
-
     public void deleteBook(int bookId) {
 
         String sql = "DELETE FROM books WHERE id =" + bookId + ";";
@@ -110,6 +114,45 @@ public class BooksService {
 
         jdbcTemplate.update(sql);
 
+    }
+
+    /**
+     * 書籍を借りる
+     */
+    public void rentBook(int bookId) {
+        String sql = "INSERT INTO rent (bookId) VALUES (" + bookId + ");";
+        jdbcTemplate.update(sql);
+
+    }
+
+
+    /**
+     * 貸し出し中の書籍情報を取得する
+     * @param bookId　書籍ID
+     * @return
+     */
+    public int getRentBookInfo(int bookId) {
+
+        // JSPに渡すデータを設定する
+        String sql = "SELECT id FROM rent WHERE bookId ="
+                + bookId;
+
+        try {
+            return jdbcTemplate.queryForObject(sql, Integer.class);
+        } catch (EmptyResultDataAccessException e) {
+            return 0;
+        }
+    }
+
+
+    /**
+     * 書籍を返却する
+     * @param bookId　書籍ID
+     */
+    public void returnBook(int bookId) {
+        String sql = "DELETE FROM rent WHERE bookId=" + bookId + ";";
+
+        jdbcTemplate.update(sql);
     }
 
 }

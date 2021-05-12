@@ -14,47 +14,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jp.co.seattle.library.service.BooksService;
 
-/**
- * 詳細表示コントローラー
- */
 @Controller
-public class DetailsController {
-    final static Logger logger = LoggerFactory.getLogger(BooksService.class);
-
-    @Autowired
-    private BooksService bookdService;
-
+public class RentBookController {
+    final static Logger logger = LoggerFactory.getLogger(RentBookController.class);
     @Autowired
     private BooksService booksService;
 
     /**
-     * 詳細画面に遷移する
+     * 書籍を借りる
      * @param locale
      * @param bookId　書籍ID
      * @param model
      * @return
      */
     @Transactional
-    @RequestMapping(value = "/details", method = RequestMethod.POST)
-    public String detailsBook(Locale locale,
-            @RequestParam("bookId") Integer bookId,
-            Model model) {
-
-        //貸し出しステータスを表示
+    @RequestMapping(value = "/rentBook", method = RequestMethod.POST)
+    public String rentBook(Locale locale, @RequestParam("bookId") Integer bookId, Model model) {
+        logger.info("Welcome rent! The client locale is {}.", locale);
 
         if (booksService.getRentBookInfo(bookId) != 0) {
+
             model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
             model.addAttribute("cantRent", "貸し出し中");
 
-        } else if (booksService.getRentBookInfo(bookId) == 0) {
-            model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
-            model.addAttribute("returnBook", "貸し出し可");
+            return "details";
         }
 
-        // デバッグ用ログ
-        logger.info("Welcome detailsControler.java! The client locale is {}.", locale);
-
-        model.addAttribute("bookDetailsInfo", bookdService.getBookInfo(bookId));
+        booksService.rentBook(bookId);
+        model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+        model.addAttribute("cantRent", "貸し出し中");
 
         return "details";
     }
