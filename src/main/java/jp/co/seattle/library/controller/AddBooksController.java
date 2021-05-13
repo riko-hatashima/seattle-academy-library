@@ -91,9 +91,6 @@ public class AddBooksController {
                 model.addAttribute("bookDetailsInfo", bookInfo);
                 return "addBook";
             }
-        } else {
-            bookInfo.setThumbnailName("");
-            bookInfo.setThumbnailUrl("");
         }
 
         // 書籍情報を新規登録する

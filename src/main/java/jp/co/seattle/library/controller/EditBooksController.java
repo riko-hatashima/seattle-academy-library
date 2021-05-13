@@ -102,11 +102,7 @@ public class EditBooksController {
                 model.addAttribute("bookDetailsInfo", bookInfo);
                 return "editBook";
             }
-        } else {
-            bookInfo.setThumbnailName("");
-            bookInfo.setThumbnailUrl("");
         }
-
 
 
 

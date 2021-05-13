@@ -14,12 +14,11 @@
 }
 .authorization > .authorization_form > form > .title {
     font-size: 125%;
-    color:#545050;
-    text-shadow:0px 0px 2px #8c5c3e;
+    text-shadow:0px 0px 2px #303030;
     margin-bottom:15px;
     padding: 10px 0 20px 0;
     text-align: center;
-    border-bottom: solid 1px #8c5c3e;
+    border-bottom: solid 1px #cbcbcb;
 }
 .authorization > .authorization_form {
     margin : 0 auto;
@@ -32,17 +31,16 @@
     padding: 10px 15px;
 }
 .authorization > .authorization_navi > .authorization_text {
-	color:#a09679;
-    padding:  0;
+    padding: 10px 0;
     font-size: 85%;
-    text-shadow:0px 0px 2px #d5bb7a;
+    text-shadow:0px 0px 2px #707070;
 }
 .authorization > .authorization_navi > .authorization_link {
     display: inline-block;
     font-size: 85%;
     margin: 5px 0;
     padding:10px;
-    borderrgb:(86, 92, 147) 0.2em;
-    color:#4b4b9a;
+    border-radius: 0.2em;
+    color:#333399;
     cursor: pointer;
 }
