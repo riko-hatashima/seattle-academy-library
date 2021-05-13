@@ -105,6 +105,8 @@ public class BooksService {
                 + "title='" + bookInfo.getTitle() + "',"
                 + "author='" + bookInfo.getAuthor() + "',"
                 + "publisher='" + bookInfo.getPublisher() + "',"
+                + "thumbnail_name='" + bookInfo.getThumbnailName() + "',"
+                + "thumbnail_url='" + bookInfo.getThumbnailUrl() + "',"
                 + "publish_date='" + bookInfo.getPublishDate() + "',"
                 + "isbn='" + bookInfo.getIsbn() + "',"
                 + "description='" + bookInfo.getDescription() + "',"
