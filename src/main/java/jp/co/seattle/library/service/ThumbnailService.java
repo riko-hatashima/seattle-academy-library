@@ -70,6 +70,7 @@ public class ThumbnailService {
      * @throws Exception
      */
     public String getURL(String fileName) throws Exception {
+
         String url = minioClient.getPresignedObjectUrl(
                 GetPresignedObjectUrlArgs.builder()
                         .method(Method.GET)
@@ -77,7 +78,9 @@ public class ThumbnailService {
                         .object(S3_OBJECT_THUMBNAILS + fileName)
                         .build());
 
+
         return url;
+
 
     }
 

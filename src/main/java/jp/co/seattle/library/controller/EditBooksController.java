@@ -70,6 +70,7 @@ public class EditBooksController {
             @RequestParam("publishDate") String publishDate,
             @RequestParam("isbn") String isbn,
             @RequestParam("description") String description,
+            @RequestParam("thumbnailUrl") String thumbnailURL,
             Model model) {
         logger.info("Welcome updateBooks.java! The client locale is {}.", locale);
         // パラメータで受け取った書籍情報をDtoに格納する。
@@ -81,6 +82,7 @@ public class EditBooksController {
         bookInfo.setPublishDate(publishDate);
         bookInfo.setIsbn(isbn);
         bookInfo.setDescription(description);
+        bookInfo.setThumbnailUrl(thumbnailURL);
 
         // クライアントのファイルシステムにある元のファイル名を設定する
         String thumbnail = file.getOriginalFilename();
@@ -103,6 +105,7 @@ public class EditBooksController {
                 return "editBook";
             }
         }
+
 
 
 
