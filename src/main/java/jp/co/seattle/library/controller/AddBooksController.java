@@ -94,13 +94,8 @@ public class AddBooksController {
         } else {
             bookInfo.setThumbnailName("");
             bookInfo.setThumbnailUrl("");
+
         }
-
-        // 書籍情報を新規登録する
-        booksService.registBook(bookInfo);
-
-
-
         // TODO 登録しs実装
         //  詳細画面に遷移する
 
@@ -110,6 +105,10 @@ public class AddBooksController {
             model.addAttribute("isbnError", "ISBNは10桁または13桁で、半角数字で入力してください");
             flag = true;
         }
+        bookInfo.setTitle(title);
+        bookInfo.setAuthor(author);
+        bookInfo.setPublisher(publisher);
+        bookInfo.setPublishDate(publishDate);
 
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
         df.setLenient(false);
@@ -119,15 +118,33 @@ public class AddBooksController {
         } catch (ParseException e) {
             model.addAttribute("publishDateError", "日付はYYYYMMDD形式で入力してください");
             flag = true;
+
         }
 
+        if (title.length() > 255) {
+            model.addAttribute("titleLength", "タイトルは255文字以内で設定してください");
+            flag = true;
+        }
+        if (author.length() > 255) {
+            model.addAttribute("authorLength", "著者名は255文字以内で設定してください");
+            flag = true;
+        }
+        if (publisher.length() > 255) {
+            model.addAttribute("publisherLength", "出版社名は255文字以内で設定してください");
+            flag = true;
+        }
+        if (publishDate.length() > 8) {
+            model.addAttribute("publishDateLength", "日付はYYYYMMDD形式で入力してください");
+            flag = true;
+        }
         if (flag) {
             return "addBook";
         }
+        // 書籍情報を新規登録する
 
+        booksService.registBook(bookInfo);
         model.addAttribute("bookDetailsInfo", booksService.getBookInfo(booksService.getBookId()));
         return "details";
 
     }
 }
-

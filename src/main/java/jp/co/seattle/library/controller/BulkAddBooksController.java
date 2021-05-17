@@ -29,7 +29,7 @@ import jp.co.seattle.library.service.BooksService;
 @Controller
 public class BulkAddBooksController {
     final static Logger logger = LoggerFactory.getLogger(BulkAddBooksController.class);
-   
+
     @Autowired
     private BooksService booksService;
 
@@ -43,7 +43,6 @@ public class BulkAddBooksController {
     public String bulk(Model model) {
         return "bulkAddBooks";
     }
-
 
     //一括登録のボタン→登録完了画面へ　ファイルを本格的に受け取る
     /**
@@ -60,7 +59,7 @@ public class BulkAddBooksController {
         List<String[]> bookData = new ArrayList<String[]>();
 
         try (InputStream stream = inputCSVFile.getInputStream();
-            Reader reader = new InputStreamReader(stream);
+                Reader reader = new InputStreamReader(stream);
                 BufferedReader br = new BufferedReader(reader);) {
 
             String line;
@@ -68,16 +67,24 @@ public class BulkAddBooksController {
             while ((line = br.readLine()) != null) {
                 String[] bulk = line.split(",", -1);
                 bookData.add(bulk);
+                if (bulk.length != 6) {
+                    model.addAttribute("nullBook", "連続したデータを入れてください");
+                    return "bulkAddBooks";
+
+                }
+
             }
         } catch (FileNotFoundException e) {
             model.addAttribute("notExistFile", "ファイルが存在しません");
         } catch (IOException e) {
             model.addAttribute("notReadFile", "ファイル読み込みに失敗しました");
         }
+
+
         boolean flag = false;
         List<String> errorMessage = new ArrayList<String>();
         for (int i = 0; i < bookData.size(); i++) {
-            boolean isValidISBN = bookData.get(i)[4].matches("[0-9]{0}|[0-9]{10}|[0-9]{13}");
+
 
 
             if (bookData.get(i)[0].isEmpty() || bookData.get(i)[1].isEmpty() || bookData.get(i)[2].isEmpty()
@@ -85,22 +92,46 @@ public class BulkAddBooksController {
                 errorMessage.add((i + 1) + "冊目に空欄の項目があります");
                 flag = true;
             }
-            else if (!(isValidISBN)) {
+
+
+
+
+
+            boolean isValidISBN = bookData.get(i)[4].matches("[0-9]{0}|[0-9]{10}|[0-9]{13}");
+
+            if (!(isValidISBN)) {
                 errorMessage.add((i + 1) + "冊目のISBNは10桁または13桁で、半角数字で入力してください");
                 flag = true;
             }
-            if (!(bookData.get(i)[3].isEmpty())) {
-
-            SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-            df.setLenient(false);
-            try {
-                df.parse(bookData.get(i)[3]);
-
-            } catch (ParseException e) {
-                errorMessage.add((i + 1) + "冊目の日付はYYYYMMDD形式で入力してください");
+            if (bookData.get(i)[0].length() > 255) {
+                errorMessage.add((i + 1) + "冊目のタイトルは255文字以内で設定してください");
                 flag = true;
             }
-        }
+            if (bookData.get(i)[1].length() > 255) {
+                errorMessage.add((i + 1) + "冊目の著者名は255文字以内で設定してください");
+                flag = true;
+            }
+            if (bookData.get(i)[2].length() > 255) {
+                errorMessage.add((i + 1) + "冊目の出版社名は255文字以内で設定してください");
+                flag = true;
+            }
+            if (bookData.get(i)[3].length() > 255) {
+                errorMessage.add((i + 1) + "冊目の日付はYYYYMMDD形式で入力してください");
+                flag = true;
+
+            }
+            if (!(bookData.get(i)[3].isEmpty())) {
+
+                SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+                df.setLenient(false);
+                try {
+                    df.parse(bookData.get(i)[3]);
+
+                } catch (ParseException e) {
+                    errorMessage.add((i + 1) + "冊目の日付はYYYYMMDD形式で入力してください");
+                    flag = true;
+                }
+            }
 
         }
 
@@ -108,6 +139,12 @@ public class BulkAddBooksController {
             model.addAttribute("errorMessage", errorMessage);
             return "bulkAddBooks";
         }
+        if (bookData.isEmpty()) {
+            model.addAttribute("emptyFile", "CSVファイルが選択されていない、または内容が空です");
+            return "bulkAddBooks";
+
+        }
+
         BookDetailsInfo bookInfo = new BookDetailsInfo();
 
         for (int i = 0; i < bookData.size(); i++) {
@@ -119,10 +156,9 @@ public class BulkAddBooksController {
             bookInfo.setDescription(bookData.get(i)[5]);
 
             booksService.registBook(bookInfo);
-
+            model.addAttribute("bulkAddComplete", "登録完了");
         }
 
-        model.addAttribute("bulkAddComplete", "登録完了");
         return "bulkAddBooks";
 
     }

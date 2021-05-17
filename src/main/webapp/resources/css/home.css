@@ -55,12 +55,12 @@ input {
 }
 
 .care1 {
-	background-color:transparent;
+	background-color: transparent;
 	color: #d29494;
 }
 
 .care2 {
-	background-color:transparent;
+	background-color: transparent;
 	color: #d4636d;
 }
 
@@ -101,12 +101,15 @@ input {
 	display: inline-block;
 	margin-right: 15px;
 	line-height: 1.5;
+	width: 250px;
+	height: 300px;
 }
 
 .book_thumnail {
 	position: relative;
 	width: 200px;
 	height: 250px;
+	vertical align: top
 }
 
 img.book_noimg, img.book_img {
@@ -136,6 +139,10 @@ img.book_img {
 	font-size: 16px;
 	color: #5a5442;
 	text-align: center;
+	word-: break-all;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .book_author {
@@ -143,18 +150,25 @@ img.book_img {
 	color: #797056;
 	text-align: center;
 	margin-bottom: 5px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .book_publisher {
 	margin: 0px 50px;
 	color: #797056;
 	font-size: 12px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .book_publish_date {
 	margin: 0px 50px;
 	color: #797056;
 	font-size: 12px;
+	
 }
 
 a.btn_add_book, a.btn_bulk_book, button.btn_addBook, button.btn_editBook,
@@ -234,6 +248,7 @@ a:hover, button:hover {
 	width: 99.2%;
 	text-indent: 1em;
 	vertical-align: middle;
+	overflow-wrap: break-word;
 }
 
 .content_right input:-webkit-autofill {

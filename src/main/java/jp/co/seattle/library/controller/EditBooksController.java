@@ -101,7 +101,7 @@ public class EditBooksController {
 
                 // 異常終了時の処理
                 logger.error("サムネイルアップロードでエラー発生", e);
-                model.addAttribute("bookDetailsInfo", bookInfo);
+                model.addAttribute("bookInfo", bookInfo);
                 return "editBook";
             }
         }
@@ -117,6 +117,10 @@ public class EditBooksController {
             model.addAttribute("isbnError", "ISBNは10桁または13桁で、半角数字で入力してください");
             flag = true;
         }
+        bookInfo.setTitle(title);
+        bookInfo.setAuthor(author);
+        bookInfo.setPublisher(publisher);
+        bookInfo.setPublishDate(publishDate);
 
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
         df.setLenient(false);
@@ -128,12 +132,30 @@ public class EditBooksController {
             flag = true;
         }
 
+        if (title.length() > 255) {
+            model.addAttribute("titleLength", "タイトルは255文字以内で設定してください");
+            flag = true;
+        }
+
+        if (author.length() > 255) {
+            model.addAttribute("authorLength", "著者名は255文字以内で設定してください");
+            flag = true;
+        }
+        if (publisher.length() > 255) {
+            model.addAttribute("publisherLength", "出版社名は255文字以内で設定してください");
+            flag = true;
+        }
+        if (publishDate.length() > 8) {
+            model.addAttribute("publishDateLength", "日付はYYYYMMDD形式で入力してください");
+            flag = true;
+        }
         if (flag) {
+            model.addAttribute("bookInfo", bookInfo);
             return "editBook";
         }
         // 書籍情報を編集
-        booksService.editBook(bookInfo);
 
+        booksService.editBook(bookInfo);
         model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 
         return "details";

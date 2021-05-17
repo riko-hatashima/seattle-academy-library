@@ -56,6 +56,13 @@
                 <c:forEach var="errorMessage" items="${errorMessage}">
                     <div class="error">${errorMessage}</div>
                 </c:forEach>
+                
+                <c:if test="${!empty emptyFile}">
+                    <div class="error">${emptyFile}</div>
+                </c:if>
+                <c:if test="${!empty nullBook}">
+                    <div class="error">${nullBook}</div>
+                </c:if>
                 <div>
                     <div>
                         <input type="file" accept=".csv" id="inputCSVFile" name="inputCSVFile">
