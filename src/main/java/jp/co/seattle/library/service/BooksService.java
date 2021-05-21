@@ -54,10 +54,6 @@ public class BooksService {
      * @return
      */
 
-    /**
-     * @param category
-     * @return
-     */
     public List<BookInfo> getBookCategory(String category) {
         String sql = "SELECT bookid,title,author,publisher,publish_date,thumbnail_url,categoryid FROM books WHERE categoryid="
                 + category + " ORDER BY TITLE ASC;";
