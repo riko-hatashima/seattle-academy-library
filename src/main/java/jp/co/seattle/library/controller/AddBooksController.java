@@ -52,6 +52,7 @@ public class AddBooksController {
     @Transactional
     @RequestMapping(value = "/insertBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String insertBook(Locale locale,
+            //@RequestParam("bookId") int bookId,
             @RequestParam("title") String title,
             @RequestParam("author") String author,
             @RequestParam("publisher") String publisher,
@@ -59,6 +60,7 @@ public class AddBooksController {
             @RequestParam("publishDate") String publishDate,
             @RequestParam("isbn") String isbn,
             @RequestParam("description") String description,
+            @RequestParam("category") int category,
             Model model) {
         logger.info("Welcome insertBooks.java! The client locale is {}.", locale);
 
@@ -70,6 +72,7 @@ public class AddBooksController {
         bookInfo.setPublishDate(publishDate);
         bookInfo.setIsbn(isbn);
         bookInfo.setDescription(description);
+        bookInfo.setCategory(category);
 
         // クライアントのファイルシステムにある元のファイル名を設定する
         String thumbnail = file.getOriginalFilename();
@@ -140,11 +143,12 @@ public class AddBooksController {
         if (flag) {
             return "addBook";
         }
-        // 書籍情報を新規登録する
 
         booksService.registBook(bookInfo);
+        booksService.insertCategory(booksService.getBookId(), bookInfo);
         model.addAttribute("bookDetailsInfo", booksService.getBookInfo(booksService.getBookId()));
-        return "details";
+
+        return "details3";
 
     }
 }

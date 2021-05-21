@@ -5,23 +5,15 @@
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-  
 <meta charset="UTF-8">
-  
-<title>書籍の追加｜シアトルライブラリ｜シアトルコンサルティング株式会社</title>   
+<title>書籍の追加｜シアトルライブラリ｜シアトルコンサルティング株式会社</title>
 <link href="<c:url value="/resources/css/reset.css" />" rel="stylesheet" type="text/css">
-  
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet">
-  
 <link href="<c:url value="/resources/css/default.css" />" rel="stylesheet" type="text/css">
-  
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-  
 <link href="<c:url value="/resources/css/home.css" />" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  
 <script src="resources/js/thumbnail.js"></script>
-    
 <script src="resources/js/addBtn.js"></script>
 </head>
 <body class="wrapper">
@@ -37,10 +29,9 @@
         <div class="right">
                   
             <ul>
-                        
                 <li><a href="<%=request.getContextPath()%>/home" class="menu"><img class="mark" src="resources/img/ie_mark_ikkai.png" />Home</a></li>
                 <li><a href="<%=request.getContextPath()%>/"> <img class="mark" src="resources/img/walk_girl_run.png" />ログアウト
-                </a></li>       
+                </a></li>
             </ul>
                 
         </div>
@@ -51,7 +42,7 @@
         <form action="<%=request.getContextPath()%>/insertBook" method="post" enctype="multipart/form-data" id="data_upload_form">
             <h1>書籍の追加</h1>
             <div class="content_body add_book_content">
-                <div>
+                <div class ="filein">
                     <span>書籍の画像</span> <span class="care care1">任意</span>
                     <div class="book_thumnail">
                         <img class="book_noimg" src="resources/img/no image.png">
@@ -78,7 +69,17 @@
                         <c:if test="${!empty isbnError}">
                             <div class="error">${isbnError}</div>
                         </c:if>
-                        <span>書籍名</span><span class="care care2">必須</span>
+                        <span>書籍名</span><span class="care care2">必須</span> <select name="category">
+                            <option value="1" selected>その他</option>
+                            <option value="2">絵本</option>
+                            <option value="3">小説</option>
+                            <option value="4">漫画</option>
+                            <option value="5">雑誌</option>
+                            <option value="6">実用書</option>
+                            <option value="7">ビジネス</option>
+                            <option value="8">学習</option>
+                            <option value="9">専門書</option>
+                        </select>
                         <c:if test="${!empty bookInfo}">
                             <input required type="text" name="title" value="${bookInfo.title}">
                         </c:if>

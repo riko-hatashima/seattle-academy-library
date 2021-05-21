@@ -62,9 +62,8 @@ public class LoginController {
        }
 
 
-        // 本の情報を取得して画面側に渡す
-        model.addAttribute("bookList",booksService.getBookList());
-        return "home";
+       // model.addAttribute("categoryList", booksService.getBookList());
+        return "home1";
    
     }
 }

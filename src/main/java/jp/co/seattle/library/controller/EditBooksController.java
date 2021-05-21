@@ -42,9 +42,39 @@ public class EditBooksController {
      */
     @RequestMapping(value = "/editBook", method = RequestMethod.POST) //value＝actionで指定したパラメータ
     //RequestParamでname属性を取得
-    public String update(Model model, @RequestParam("bookId") int bookId) {
+    public String update(Locale locale, @RequestParam("bookId") int bookId,
+            Model model) {
+        //カテゴリを表示
+        switch (booksService.getCategoryId(bookId)) {
+        case 1:
+            model.addAttribute("category1", "selected");
+            break;
+        case 2:
+            model.addAttribute("category2", "selected");
+            break;
+        case 3:
+            model.addAttribute("category3", "selected");
+            break;
+        case 4:
+            model.addAttribute("category4", "selected");
+            break;
+        case 5:
+            model.addAttribute("category5", "selected");
+            break;
+        case 6:
+            model.addAttribute("category6", "selected");
+            break;
+        case 7:
+            model.addAttribute("category7", "selected");
+            break;
+        case 8:
+            model.addAttribute("category8", "selected");
+            break;
+        case 9:
+            model.addAttribute("category9", "selected");
+            break;
+        }
         model.addAttribute("bookInfo", booksService.getBookInfo(bookId));
-
         return "editBook";
     }
 
@@ -71,6 +101,7 @@ public class EditBooksController {
             @RequestParam("isbn") String isbn,
             @RequestParam("description") String description,
             @RequestParam("thumbnailUrl") String thumbnailURL,
+            @RequestParam("category") int category,
             Model model) {
         logger.info("Welcome updateBooks.java! The client locale is {}.", locale);
         // パラメータで受け取った書籍情報をDtoに格納する。
@@ -83,7 +114,7 @@ public class EditBooksController {
         bookInfo.setIsbn(isbn);
         bookInfo.setDescription(description);
         bookInfo.setThumbnailUrl(thumbnailURL);
-
+        bookInfo.setCategory(category);
         // クライアントのファイルシステムにある元のファイル名を設定する
         String thumbnail = file.getOriginalFilename();
 
@@ -105,9 +136,6 @@ public class EditBooksController {
                 return "editBook";
             }
         }
-
-
-
 
         //  詳細画面に遷移する
 
@@ -156,9 +184,10 @@ public class EditBooksController {
         // 書籍情報を編集
 
         booksService.editBook(bookInfo);
+        booksService.insertCategory(bookId, bookInfo);
         model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 
-        return "details";
+        return "details3";
 
     }
 }

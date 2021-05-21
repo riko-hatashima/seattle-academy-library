@@ -48,7 +48,7 @@
         <form action="<%=request.getContextPath()%>/updateBook" method="post" enctype="multipart/form-data" id="data_upload_form">
             <h1>書籍の編集</h1>
             <div class="content_body add_book_content">
-                <div>
+                <div class="filein">
                     <span>書籍の画像</span> <span class="care care1">任意</span>
                     <div class="book_thumnail">
                         <a href="${bookInfo.thumbnailUrl}" data-lightbox="image-1"> <c:if test="${empty bookInfo.thumbnailUrl}">
@@ -63,7 +63,6 @@
                 <input type="hidden" name="thumbnailUrl" value="${bookInfo.thumbnailUrl}"> <input type="hidden" name="bookId" value="${bookInfo.bookId}">
                 <div class="content_right">
                     <div>
-                        
                         <c:if test="${!empty titleLength}">
                             <div class="error">${titleLength}</div>
                         </c:if>
@@ -82,7 +81,20 @@
                         <c:if test="${!empty isbnError}">
                             <div class="error">${isbnError}</div>
                         </c:if>
-                        <span>書籍名</span><span class="care care2">必須</span>
+                    </div>
+                    <div>
+                         <span>書籍名</span><span class="care care2">必須</span>
+                         <select name="category">
+                            <option value="1" ${category1}>その他</option>
+                            <option value="2" ${category2}>絵本</option>
+                            <option value="3" ${category3}>小説</option>
+                            <option value="4" ${category4}>漫画</option>
+                            <option value="5" ${category5}>雑誌</option>
+                            <option value="6" ${category6}>実用書</option>
+                            <option value="7" ${category7}>ビジネス</option>
+                            <option value="8" ${category8}>学習</option>
+                            <option value="9" ${category9}>専門書</option>
+                        </select>
                         <c:if test="${!empty bookInfo}">
                             <input required type="text" name="title" value="${bookInfo.title}">
                         </c:if>

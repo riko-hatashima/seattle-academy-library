@@ -47,13 +47,13 @@ public class DeleteBookController {
         if (booksService.getRentBookInfo(bookId) == 0) {
             booksService.deleteBook(bookId);
             model.addAttribute("bookList", booksService.getBookList());
-            return "home";
+            return "home1";
         }
 
         model.addAttribute("deleteError", "貸し出し中のため本を削除できません");
         model.addAttribute("cantRent", "貸し出し中");
         model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
-        return "details";
+        return "details3";
 
     }
 }
