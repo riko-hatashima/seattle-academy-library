@@ -38,6 +38,6 @@ public class ReturnBookController {
         model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
         model.addAttribute("returnBook", "貸し出し可");
 
-        return "details";
+        return "details3";
     }
 }

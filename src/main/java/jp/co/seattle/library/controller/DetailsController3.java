@@ -1,5 +1,4 @@
 package jp.co.seattle.library.controller;
-
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -18,11 +17,8 @@ import jp.co.seattle.library.service.BooksService;
  * 詳細表示コントローラー
  */
 @Controller
-public class DetailsController {
+public class DetailsController3 {
     final static Logger logger = LoggerFactory.getLogger(BooksService.class);
-
-    @Autowired
-    private BooksService bookdService;
 
     @Autowired
     private BooksService booksService;
@@ -54,8 +50,10 @@ public class DetailsController {
         // デバッグ用ログ
         logger.info("Welcome detailsControler.java! The client locale is {}.", locale);
 
-        model.addAttribute("bookDetailsInfo", bookdService.getBookInfo(bookId));
 
-        return "details";
+        return "details3";
     }
+
+    
+
 }

@@ -37,13 +37,13 @@ public class RentBookController {
             model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
             model.addAttribute("cantRent", "貸し出し中");
 
-            return "details";
+            return "details3";
         }
 
         booksService.rentBook(bookId);
         model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
         model.addAttribute("cantRent", "貸し出し中");
 
-        return "details";
+        return "details3";
     }
 }
