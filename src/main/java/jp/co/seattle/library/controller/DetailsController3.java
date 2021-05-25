@@ -50,7 +50,6 @@ public class DetailsController3 {
         // デバッグ用ログ
         logger.info("Welcome detailsControler.java! The client locale is {}.", locale);
 
-        //model.addAttribute("bookDetailsInfo", booksService.getBookInfo(booksService.getBookId()));
 
         return "details3";
     }

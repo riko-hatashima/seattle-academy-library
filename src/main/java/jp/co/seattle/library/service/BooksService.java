@@ -67,7 +67,7 @@ public class BooksService {
      * @return
      */
     public int getCategoryId(int bookId) {
-        String sql = " SELECT categoryid FROM books WHERE bookid=" + bookId + ";";
+        String sql = "SELECT category FROM categories INNER JOIN books ON categories.id=books.categoryid WHERE bookid="+bookId+";";
         return jdbcTemplate.queryForObject(sql, Integer.class);
 
     }
@@ -199,9 +199,11 @@ public class BooksService {
 
     }
 
+
     public String searchTitle(String title) {
         String sql = "SELECT bookid,title,author,publisher,publish_date,thumbnail_url FROM books WHERE title like '"
                 + title + "%';";
         return jdbcTemplate.queryForObject(sql, String.class);
     }
+
 }
