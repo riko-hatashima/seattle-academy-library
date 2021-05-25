@@ -1,0 +1,64 @@
+<%@ page import="java.util.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<html>
+<head>
+<title>ホーム｜シアトルライブラリ｜シアトルコンサルティング株式会社</title>
+<link href="<c:url value="/resources/css/reset.css" />" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet">
+<link href="<c:url value="/resources/css/default.css" />" rel="stylesheet" type="text/css">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+<link href="<c:url value="/resources/css/home.css" />" rel="stylesheet" type="text/css">
+</head>
+<body class="wrapper">
+    <header>
+        <div class="left">
+            <img class="mark" src="resources/img/logo.png" />
+            <div class="logo">Seattle Library</div>
+        </div>
+        <div class="right">
+            <ul>
+                <li><a href="<%=request.getContextPath()%>/home" class="menu"><img class="mark" src="resources/img/ie_mark_ikkai.png" />Home</a></li>
+                <li><a href="<%=request.getContextPath()%>/"><img class="mark" src="resources/img/walk_girl_run.png" />ログアウト</a></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <h1>検索結果</h1>
+        <div class="search">
+            <form action="<%=request.getContextPath()%>/searchResult" method="post" enctype="multipart/form-data" id="data_upload_form">
+                 <img class="mark" src="resources/img/magnifier_mushimegane_blank.png" />
+                <c:if test="${!empty bookInfo}">
+                    <input required type="text" name="search" value="searchTitle">
+                </c:if>
+                <c:if test="${empty bookInfo}">
+                    <input required type="text" name="search" placeholder="検索">
+                </c:if>
+            </form>
+        </div>
+        <div>
+            <div class="resultBooks">
+                <c:forEach var="bookInfo" items="${searchResult}">
+                    <input type="hidden" name="searchTitle" value="${bookDetailsInfo.title}">
+                    <div class="aBook">
+                        <form method="post" class="book_thumnail" action="<%=request.getContextPath()%>/details">
+                            <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <c:if test="${empty bookInfo.thumbnail}">
+                                    <img class="book_noimg" src="resources/img/no image.png">
+                                </c:if> <c:if test="${!empty bookInfo.thumbnail}">
+                                    <img class="book_noimg" src="${bookInfo.thumbnail}">
+                                </c:if> <input type="hidden" id="bookId" name="bookId" value="${bookInfo.bookId}">
+                            </a>
+                        </form>
+                        <input type="hidden" name="title" value="${bookInfo.title}">
+                        <ul>
+                            <li class="book_title">${bookInfo.title}</li>
+                            <li class="book_author">${bookInfo.author}（著）</li>
+                            <li class="book_publisher">出版社:${bookInfo.publisher}</li>
+                            <li class="book_publish_date">出版日:${bookInfo.publishDate}</li>
+                        </ul>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
