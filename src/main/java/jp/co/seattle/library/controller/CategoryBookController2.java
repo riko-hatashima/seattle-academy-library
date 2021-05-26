@@ -21,7 +21,14 @@ public class CategoryBookController2 {
     @Autowired
     private BooksService booksService;
 
-    //本の一覧画面に遷移する
+
+    /**
+     * それぞれのカテゴリの書籍一覧
+     * @param locale
+     * @param category
+     * @param model
+     * @return
+     */
     @Transactional
     @RequestMapping(value = "/bookCategory", method = RequestMethod.GET)
     public String displayBooks(Locale locale, @RequestParam("category") String category, Model model) {
