@@ -38,10 +38,9 @@ a.warning {
 }
 /* ロゴ・マーク：マーク */
 .mark {
-	width: 48px;
-	height: 48px;
+	width: 40px;
+	height: 40px;
 	border-style: none;
-	background: transparent;
 }
 /* ロゴ・マーク：ロゴ */
 .logo {
@@ -54,10 +53,21 @@ a.warning {
 input[type=text], input[type=password], input[type=email] {
 	font-size: 100%;
 	padding: 5px 0;
-	width: 99.2%;
+	background-color: #fdfcf4;
 	text-indent: 1em;
-	outline: none;
-	color:#3c3927;
+	color: #3c3927;
+}
+
+input[type=text] {
+	width: 250px;
+}
+
+input[type=search] {
+	border-color: #bfcbd0;
+	width: 200px;
+	margin-left: 10px; height : 40px;
+	background: #fffde9;
+	height: 40px;
 }
 /* 基本デザイン：テキストボックス系(フォーカス時) */
 input[type=text]:focus, input[type=password]:focus {
@@ -87,7 +97,7 @@ input[type=submit].primary, input[type=button].primary {
 
 /* 入力フォームのパーツ：ラベル */
 .label {
-	color:#825c44;
+	color: #825c44;
 	display: block;
 	margin: 10px;
 	width: 99.2%;
@@ -128,7 +138,6 @@ header {
 	border-bottom: double 3px #e0d299;
 	padding: 10px;
 	background: transparent;
-	
 }
 
 /* 共通ヘッダー（左） */
@@ -137,7 +146,6 @@ header>.left {
 	align-items: center;
 	justify-content: left;
 	background: transparent;
-	
 }
 
 header>.left>a {
@@ -146,7 +154,6 @@ header>.left>a {
 	justify-content: center;
 	align-items: center;
 	background: transparent;
-	
 }
 /* 共通ヘッダー（中） */
 header>.center {
@@ -156,7 +163,6 @@ header>.center {
 	flex-basis: auto;
 	flex: 5;
 	background: transparent;
-	
 }
 /* 共通ヘッダー（中）_検索フォーム */
 header>.center>.search {
@@ -267,11 +273,19 @@ main {
 }
 /* コンテンツ本体 */
 main .content_body {
-	
 	display: flex;
 	flex-wrap: wrap;
 }
 
+.content_right div {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.content_right>div>span {
+	
+}
 /* 共通フッター */
 footer {
 	width: 100%;
@@ -291,7 +305,7 @@ ul {
 }
 
 h1 {
-	background-color:transparent;
+	background-color: transparent;
 	padding: 0.4em 0.5em;
 	color: #5a5442;
 	border-left: solid 5px #678394;
@@ -301,4 +315,3 @@ h1 {
 	color: red;
 	font-weight: bold;
 }
-

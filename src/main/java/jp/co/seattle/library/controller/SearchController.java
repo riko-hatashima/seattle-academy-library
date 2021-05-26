@@ -25,10 +25,13 @@ public class SearchController {
     @RequestMapping(value = "/searchResult", method = RequestMethod.POST)
     public String searchBooks(Locale locale, @RequestParam("searchTitle") String title, Model model) {
 
-        
+        //検索結果が無いときのエラーメッセージ
+        if (booksService.searchTitle(title).isEmpty()) {
+            model.addAttribute("searchError", "該当する書籍が見つかりませんでした");
+        }
 
         model.addAttribute("searchResult", booksService.searchTitle(title));
-        return "searchResult";
+        return "search";
     }
 
 }

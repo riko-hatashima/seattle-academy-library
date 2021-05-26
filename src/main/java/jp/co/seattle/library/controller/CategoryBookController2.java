@@ -26,8 +26,6 @@ public class CategoryBookController2 {
     @RequestMapping(value = "/bookCategory", method = RequestMethod.GET)
     public String displayBooks(Locale locale, @RequestParam("category") String category, Model model) {
 
-
-
         model.addAttribute("oneCategoryBooks", booksService.getBookCategory(category));
         return "categoryBook2";
     }

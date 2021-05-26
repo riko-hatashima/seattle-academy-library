@@ -20,7 +20,7 @@
         <div class="right">
             <ul>
                 <li><a href="<%=request.getContextPath()%>/home" class="menu"><img class="mark" src="resources/img/ie_mark_ikkai.png" />Home</a></li>
-                <li><a href="<%=request.getContextPath()%>/"><img class="mark" src="resources/img/walk_girl_run.png" />ログアウト</a></li>
+                <li><a href="<%=request.getContextPath()%>/"><img class="mark" src="resources/img/walk_girl_run.png" />Logout</a></li>
                  </ul>
        
         
@@ -30,43 +30,45 @@
  
     <main>
         <h1>Home</h1>
+        <div class="menu">
         <a href="<%=request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a> <a href="<%=request.getContextPath()%>/bulkAddBooks" class="btn_bulk_book">一括登録</a>
-         <div class="search"><img class="mark" src="resources/img/magnifier_mushimegane_blank.png" />
+         <div class="search">
         <form action="<%=request.getContextPath()%>/searchResult" method="post" enctype="multipart/form-data" id="data_upload_form">
             <c:if test="${!empty bookInfo}">
-                <input required type="text" name="searchTitle" value=>
+                <input required type="search" name="searchTitle" value=>
             </c:if>
             <c:if test="${empty bookInfo}">
-                <input required type="text" name="searchTitle" placeholder="検索">
+                <input required type="search" name="searchTitle" placeholder="検索">
             </c:if></form>
         </div>
-        
-        
+         <c:if test="${!empty searchError}">
+            <div class="error_msg">${searchError}</div>
+        </c:if></div>
         <c:if test="${!empty resultMessage}">
             <div class="error_msg">${resultMessage}</div>
         </c:if>
         <div class="categoryList1">
             <div class="categoryName">
                 <form method="get" class="category_thumbnail" action="<%=request.getContextPath()%>/bookCategory">
-                    <input type="hidden" id="category" name="category" value="2"> <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <img class="categoryImg" src="resources/img/1.png">
+                    <input type="hidden" id="category" name="category" value="pictureBook"> <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <img class="categoryImg" src="resources/img/1.png">
                     </a>
                 </form>
             </div>
             <div class="categoryName">
                 <form method="get" class="category_thumbnail" action="<%=request.getContextPath()%>/bookCategory">
-                    <input type="hidden" id="category" name="category" value="3"> <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <img class="categoryImg" src="resources/img/2.png">
+                    <input type="hidden" id="category" name="category" value="novel"> <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <img class="categoryImg" src="resources/img/2.png">
                     </a>
                 </form>
             </div>
             <div class="categoryName">
                 <form method="get" class="category_thumbnail" action="<%=request.getContextPath()%>/bookCategory">
-                    <input type="hidden" id="category" name="category" value="4"> <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <img class="categoryImg" src="resources/img/3.png">
+                    <input type="hidden" id="category" name="category" value="comic"> <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <img class="categoryImg" src="resources/img/3.png">
                     </a>
                 </form>
             </div>
             <div class="categoryName">
                 <form method="get" class="category_thumbnail" action="<%=request.getContextPath()%>/bookCategory">
-                    <input type="hidden" id="category" name="category" value="5"> <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <img class="categoryImg" src="resources/img/4.png">
+                    <input type="hidden" id="category" name="category" value="magazine"> <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <img class="categoryImg" src="resources/img/4.png">
                     </a>
                 </form>
             </div>
@@ -74,31 +76,31 @@
         <div class="categoryList2">
             <div class="categoryName">
                 <form method="get" class="category_thumbnail2" action="<%=request.getContextPath()%>/bookCategory">
-                    <input type="hidden" id="category" name="category" value="6"> <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <img class="categoryImg2" src="resources/img/5.png">
+                    <input type="hidden" id="category" name="category" value="pratical"> <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <img class="categoryImg2" src="resources/img/5.png">
                     </a>
                 </form>
             </div>
             <div class="categoryName">
                 <form method="get" class="category_thumbnail2" action="<%=request.getContextPath()%>/bookCategory">
-                    <input type="hidden" id="category" name="category" value="7"> <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <img class="categoryImg2" src="resources/img/6.png">
+                    <input type="hidden" id="category" name="category" value="business"> <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <img class="categoryImg2" src="resources/img/6.png">
                     </a>
                 </form>
             </div>
             <div class="categoryName">
                 <form method="get" class="category_thumbnail2" action="<%=request.getContextPath()%>/bookCategory">
-                    <input type="hidden" id="category" name="category" value="8"> <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <img class="categoryImg2" src="resources/img/7.png">
+                    <input type="hidden" id="category" name="category" value="study"> <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <img class="categoryImg2" src="resources/img/7.png">
                     </a>
                 </form>
             </div>
             <div class="categoryName">
                 <form method="get" class="category_thumbnail2" action="<%=request.getContextPath()%>/bookCategory">
-                    <input type="hidden" id="category" name="category" value="9"> <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <img class="categoryimg2" src="resources/img/8.png">
+                    <input type="hidden" id="category" name="category" value="technical"> <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <img class="categoryimg2" src="resources/img/8.png">
                     </a>
                 </form>
             </div>
             <div class="categoryName">
                 <form method="get" class="category_thumbnail2" action="<%=request.getContextPath()%>/bookCategory">
-                    <input type="hidden" id="category" name="category" value="1"> <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <img class="categoryimg2" src="resources/img/9.png">
+                    <input type="hidden" id="category" name="category" value="other"> <a href="javascript:void(0)" onclick="this.pare1ntNode.submit();"> <img class="categoryimg2" src="resources/img/9.png">
                     </a>
                 </form>
                

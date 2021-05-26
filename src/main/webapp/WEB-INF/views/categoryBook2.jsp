@@ -20,18 +20,29 @@
         <div class="right">
             <ul>
                 <li><a href="<%=request.getContextPath()%>/home" class="menu"><img class="mark" src="resources/img/ie_mark_ikkai.png" />Home</a></li>
-                <li><a href="<%=request.getContextPath()%>/"><img class="mark" src="resources/img/walk_girl_run.png" />ログアウト</a></li>
+                <li><a href="<%=request.getContextPath()%>/"><img class="mark" src="resources/img/walk_girl_run.png" />Logout</a></li>
             </ul>
         </div>
     </header>
     <main>
-        <h1>Home</h1>
+        <h1>書籍一覧</h1>
+        <div class="menu">
         <a href="<%=request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a> <a href="<%=request.getContextPath()%>/bulkAddBooks" class="btn_bulk_book">一括登録</a>
-        <div class="content_body">
-           
-            <c:if test="${!empty resultMessage}">
-                <div class="error_msg">${resultMessage}</div>
+         <div class="search">
+        <form action="<%=request.getContextPath()%>/searchResult" method="post" enctype="multipart/form-data" id="data_upload_form">
+            <c:if test="${!empty bookInfo}">
+                <input required type="search" name="searchTitle" value=>
             </c:if>
+            <c:if test="${empty bookInfo}">
+                <input required type="search" name="searchTitle" placeholder="検索">
+            </c:if></form>
+        </div>
+         <c:if test="${!empty searchError}">
+            <div class="error_msg">${searchError}</div>
+        </c:if></div>
+        <c:if test="${!empty resultMessage}">
+            <div class="error_msg">${resultMessage}</div>
+        </c:if>
             <div>
                 <div class="oneCategoryBooks">
                     <c:forEach var="bookInfo" items="${oneCategoryBooks}">
