@@ -46,31 +46,31 @@ public class EditBooksController {
             Model model) {
         //カテゴリを表示
         switch (booksService.getCategoryId(bookId)) {
-        case 1:
+        case "other":
             model.addAttribute("category1", "selected");
             break;
-        case 2:
+        case "pictureBook":
             model.addAttribute("category2", "selected");
             break;
-        case 3:
+        case "novel":
             model.addAttribute("category3", "selected");
             break;
-        case 4:
+        case "comic":
             model.addAttribute("category4", "selected");
             break;
-        case 5:
+        case "magazine":
             model.addAttribute("category5", "selected");
             break;
-        case 6:
+        case "pratical":
             model.addAttribute("category6", "selected");
             break;
-        case 7:
+        case "business":
             model.addAttribute("category7", "selected");
             break;
-        case 8:
+        case "study":
             model.addAttribute("category8", "selected");
             break;
-        case 9:
+        case "technical":
             model.addAttribute("category9", "selected");
             break;
         }
@@ -101,7 +101,7 @@ public class EditBooksController {
             @RequestParam("isbn") String isbn,
             @RequestParam("description") String description,
             @RequestParam("thumbnailUrl") String thumbnailURL,
-            @RequestParam("category") int category,
+            @RequestParam("category") String category,
             Model model) {
         logger.info("Welcome updateBooks.java! The client locale is {}.", locale);
         // パラメータで受け取った書籍情報をDtoに格納する。

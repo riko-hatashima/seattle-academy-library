@@ -55,8 +55,8 @@ public class BooksService {
      */
 
     public List<BookInfo> getBookCategory(String category) {
-        String sql = "SELECT bookid,title,author,publisher,publish_date,thumbnail_url,categoryid FROM books WHERE categoryid="
-                + category + " ORDER BY TITLE ASC;";
+        String sql = "SELECT bookid,title,author,publisher,publish_date,thumbnail_url,category FROM books INNER JOIN categories ON categories.id=books.categoryid WHERE category='"
+                + category + "'ORDER BY TITLE ASC;";
         List<BookInfo> categoryBookInfo = jdbcTemplate.query(sql, new BookInfoRowMapper());
         return categoryBookInfo;
     }
@@ -66,9 +66,10 @@ public class BooksService {
      * @param bookId
      * @return
      */
-    public int getCategoryId(int bookId) {
-        String sql = "SELECT category FROM categories INNER JOIN books ON categories.id=books.categoryid WHERE bookid="+bookId+";";
-        return jdbcTemplate.queryForObject(sql, Integer.class);
+    public String getCategoryId(int bookId) {
+        String sql = "SELECT category FROM categories INNER JOIN books ON categories.id=books.categoryid WHERE bookid="
+                + bookId + ";";
+        return jdbcTemplate.queryForObject(sql, String.class);
 
     }
 
@@ -89,7 +90,7 @@ public class BooksService {
     public BookDetailsInfo getBookInfo(int bookId) {
 
         // JSPに渡すデータを設定する
-        String sql = "SELECT * FROM books WHERE bookid ="
+        String sql = "SELECT bookid,title, author,publisher,thumbnail_name,thumbnail_url,publish_date,isbn,description,reg_date,upd_date,category FROM books INNER JOIN categories ON categories.id=books.categoryid WHERE bookid="
                 + bookId + ";";
 
         //categoryがnullになっている
@@ -111,7 +112,6 @@ public class BooksService {
                 + bookInfo.getPublishDate() + "','"
                 + bookInfo.getIsbn() + "','"
                 + bookInfo.getDescription() + "',"
-
                 + "sysdate(),"
                 + "sysdate())";
 
@@ -189,21 +189,60 @@ public class BooksService {
     }
 
     /**
+     * 書籍カテゴリの追加・更新
      * booksTBLにcategoryidをセットする
+     * 入力された文字列を数字に変換
      * @param bookId
      * @param bookInfo
      */
     public void insertCategory(int bookId, BookDetailsInfo bookInfo) {
-        String sql = " UPDATE books SET categoryid=" + bookInfo.getCategory() + " WHERE bookid=" + bookId + ";";
-        jdbcTemplate.update(sql);
 
+        int cateId = 0;
+        switch (bookInfo.getCategory()) {
+        case "other":
+            cateId = 1;
+            break;
+        case "pictureBook":
+            cateId = 2;
+            break;
+        case "novel":
+            cateId = 3;
+            break;
+        case "comic":
+            cateId = 4;
+            break;
+        case "magazine":
+            cateId = 5;
+            break;
+        case "pratical":
+            cateId = 6;
+            break;
+        case "business":
+            cateId = 7;
+            break;
+        case "study":
+            cateId = 8;
+            break;
+        case "technical":
+            cateId = 9;
+            break;
+        }
+        String sql = " UPDATE books SET categoryid=" + cateId + " WHERE bookid=" + bookId + ";";
+        jdbcTemplate.update(sql);
     }
 
+    /**
+     * タイトル名で検索
+     * @param title
+     * @return
+     */
+    public List<BookInfo> searchTitle(String title) {
 
-    public String searchTitle(String title) {
-        String sql = "SELECT bookid,title,author,publisher,publish_date,thumbnail_url,categoryid FROM books WHERE title like '"
-                + title + "%';";
-        return jdbcTemplate.queryForObject(sql, String.class);
+        String sql = "SELECT bookid,title,author,publisher,thumbnail_url,publish_date FROM books WHERE title LIKE '%"
+                + title + "%'ORDER BY TITLE ASC;";
+
+        List<BookInfo> searchResult = jdbcTemplate.query(sql, new BookInfoRowMapper());
+        return searchResult;
     }
 
 }

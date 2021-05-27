@@ -30,7 +30,7 @@
                   
             <ul>
                 <li><a href="<%=request.getContextPath()%>/home" class="menu"><img class="mark" src="resources/img/ie_mark_ikkai.png" />Home</a></li>
-                <li><a href="<%=request.getContextPath()%>/"> <img class="mark" src="resources/img/walk_girl_run.png" />ログアウト
+                <li><a href="<%=request.getContextPath()%>/"> <img class="mark" src="resources/img/walk_girl_run.png" />Logout
                 </a></li>
             </ul>
                 
@@ -70,15 +70,15 @@
                             <div class="error">${isbnError}</div>
                         </c:if>
                         <span>書籍名</span><span class="care care2">必須</span> <select name="category">
-                            <option value="1" selected>その他</option>
-                            <option value="2">絵本</option>
-                            <option value="3">小説</option>
-                            <option value="4">漫画</option>
-                            <option value="5">雑誌</option>
-                            <option value="6">実用書</option>
-                            <option value="7">ビジネス</option>
-                            <option value="8">学習</option>
-                            <option value="9">専門書</option>
+                            <option value="other" selected>その他</option>
+                            <option value="pictureBook">絵本</option>
+                            <option value="novel">小説</option>
+                            <option value="comic">漫画</option>
+                            <option value="magazine">雑誌</option>
+                            <option value="pratical">実用書</option>
+                            <option value="business">ビジネス</option>
+                            <option value="study">学習</option>
+                            <option value="technical">専門書</option>
                         </select>
                         <c:if test="${!empty bookInfo}">
                             <input required type="text" name="title" value="${bookInfo.title}">

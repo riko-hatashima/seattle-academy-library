@@ -11,8 +11,7 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p,
 	font-size: 100%;
 	color: #5a5442;
 	vertical-align: baseline;
-	background: linear-gradient(#f7ebc7 2px, transparent 2px),
-		linear-gradient(to right, #f7ebc7 2px, #f6e6b4 2px);
+
 	background-size: 20px 20px;
 }
 
@@ -20,6 +19,10 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p,
 
 body {
 	line-height: 1;
+	background: linear-gradient(#f7ebc7 2px, transparent 2px),
+		linear-gradient(to right, #f7ebc7 2px, #f6e6b4 2px);
+	background-size: 20px 20px;
+
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup,
@@ -87,3 +90,4 @@ hr {
 input, select {
 	vertical-align: middle;
 }
+

@@ -60,7 +60,7 @@ public class AddBooksController {
             @RequestParam("publishDate") String publishDate,
             @RequestParam("isbn") String isbn,
             @RequestParam("description") String description,
-            @RequestParam("category") int category,
+            @RequestParam("category") String category,
             Model model) {
         logger.info("Welcome insertBooks.java! The client locale is {}.", locale);
 

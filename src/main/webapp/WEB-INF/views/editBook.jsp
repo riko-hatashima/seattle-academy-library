@@ -37,7 +37,7 @@
         <div class="right">
             <ul>
                 <li><a href="<%=request.getContextPath()%>/home" class="menu"><img class="mark" src="resources/img/ie_mark_ikkai.png" />Home</a></li>
-                <li><a href="<%=request.getContextPath()%>/"><img class="mark" src="resources/img/walk_girl_run.png" />ログアウト</a></li>
+                <li><a href="<%=request.getContextPath()%>/"><img class="mark" src="resources/img/walk_girl_run.png" />Logout</a></li>
             </ul>
                 
         </div>
@@ -85,15 +85,15 @@
                     <div>
                          <span>書籍名</span><span class="care care2">必須</span>
                          <select name="category">
-                            <option value="1" ${category1}>その他</option>
-                            <option value="2" ${category2}>絵本</option>
-                            <option value="3" ${category3}>小説</option>
-                            <option value="4" ${category4}>漫画</option>
-                            <option value="5" ${category5}>雑誌</option>
-                            <option value="6" ${category6}>実用書</option>
-                            <option value="7" ${category7}>ビジネス</option>
-                            <option value="8" ${category8}>学習</option>
-                            <option value="9" ${category9}>専門書</option>
+                            <option value="other" ${category1}>その他</option>
+                            <option value="pictureBook" ${category2}>絵本</option>
+                            <option value="novel" ${category3}>小説</option>
+                            <option value="comic" ${category4}>漫画</option>
+                            <option value="magazine" ${category5}>雑誌</option>
+                            <option value="pratical" ${category6}>実用書</option>
+                            <option value="business" ${category7}>ビジネス</option>
+                            <option value="study" ${category8}>学習</option>
+                            <option value="technical" ${category9}>専門書</option>
                         </select>
                         <c:if test="${!empty bookInfo}">
                             <input required type="text" name="title" value="${bookInfo.title}">

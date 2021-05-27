@@ -27,7 +27,7 @@
                     <form method="post" action="login">
                         <div class="title">ログイン</div>
                         <label class="label">メールアドレス</label>
-                        <input type="text" class="input" name="email" id="email" autocomplete="off" required/>
+                        <input type="email" class="input" name="email" id="email" autocomplete="off" required/>
                         <label class="label">パスワード</label>
                         <input type="password" class="input" id="password" name="password" required/>
  							<c:if test="${!empty errorMessage}">
